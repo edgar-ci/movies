@@ -1,5 +1,4 @@
 import React from 'react';
-import { VscAdd } from 'react-icons/vsc';
 import { BiPlayCircle } from 'react-icons/bi';
 import Backdrop from '../Backdrop';
 import { URLS } from '../../constants';

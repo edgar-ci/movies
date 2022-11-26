@@ -10,5 +10,5 @@ const urlDiscover = (apiKey, id) => discover.replace('::apiKey', apiKey).replace
 export default {
   urlSearch,
   urlDiscover,
-  urlImages
+  urlImages,
 };

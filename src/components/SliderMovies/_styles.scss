@@ -43,8 +43,8 @@
 }
 
 .swiper-slide {
-  transition: transform .4s,opacity .4s, padding .4s, box-shadow .2s !important;
-  transition-delay: .2s !important;
+  transition: transform 0.4s, opacity 0.4s, padding 0.4s, box-shadow 0.2s !important;
+  transition-delay: 0.2s !important;
 }
 
 .swiper-wrapper:hover {
@@ -57,10 +57,10 @@
   }
 }
 
-.slider__movies--movie:hover{
+.slider__movies--movie:hover {
   padding-right: 0 !important;
   transform: translateY(0.5rem);
-  .slider__footer{
+  .slider__footer {
     display: block;
     z-index: 102;
   }
@@ -137,7 +137,7 @@
       align-items: center;
       font-size: 1.25rem;
       transition: all 200ms ease-in-out;
-      &:hover{
+      &:hover {
         border: 2px solid #fff;
       }
 

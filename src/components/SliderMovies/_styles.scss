@@ -20,39 +20,49 @@
 
 .slider__movies--container {
   overflow: visible;
+  overflow-y: hidden;
   padding: 1.5rem 0;
 
   div.swiper-button-prev,
   div.swiper-button-next {
-    transition: all 150ms !important;
+    transition: all 200ms !important;
     color: $white;
     opacity: 0;
     &:hover {
       transform: scale(1.2) !important;
-      transition: all 150ms !important;
+      transition: all 200ms !important;
     }
   }
   &:hover {
     div.swiper-button-prev,
     div.swiper-button-next {
       opacity: 1;
+      z-index: 200;
     }
   }
 }
 
 .swiper-slide {
-  transition: transform 150ms !important;
+  transition: transform .4s,opacity .4s, padding .4s, box-shadow .2s !important;
+  transition-delay: .2s !important;
 }
 
 .swiper-wrapper:hover {
   .swiper-slide {
     z-index: 10000;
     &:hover {
-      transform: scale(1.3) !important;
-      @include responsive(tab_port) {
-        transform: scale(1.2) translateX(120px) !important;
-      }
+      transform: scale(1.125) !important;
+      box-shadow: rgb(0 0 0 / 75%) 0px 3px 10px;
     }
+  }
+}
+
+.slider__movies--movie:hover{
+  padding-right: 0 !important;
+  transform: translateY(0.5rem);
+  .slider__footer{
+    display: block;
+    z-index: 102;
   }
 }
 
@@ -73,15 +83,9 @@
     display: none;
   }
 
-  &--container {
-    @include responsive(phone) {
-      width: 98vw;
-    }
-  }
   &--movie:hover ~ &--movie {
     transform: translate3d(2rem, 0, 0);
     z-index: 100;
-    padding-right: 0;
   }
 
   &--movie {
@@ -102,9 +106,49 @@
       border-radius: 5px;
     }
   }
+
   .slider__footer {
-    background-color: $dark;
+    background-color: $background;
+    padding: 1rem;
+    margin-top: -0.5rem;
+    position: absolute;
+    z-index: 101;
+    left: 0;
+    right: 0;
+    top: 160px;
     &--btns {
+      display: flex;
+      justify-content: space-between;
+      margin: 0.25rem 0 1.5rem;
+      & > div {
+        column-gap: 0.5rem;
+        display: flex;
+        justify-content: space-between;
+      }
+    }
+
+    &--icon {
+      width: 2.25rem;
+      height: 2.25rem;
+      display: inline-flex;
+      border-radius: 50%;
+      border: 2px solid #aaa;
+      justify-content: center;
+      align-items: center;
+      font-size: 1.25rem;
+      transition: all 200ms ease-in-out;
+      &:hover{
+        border: 2px solid #fff;
+      }
+
+      &.bg-white {
+        background-color: $white;
+        border: 2px solid $white;
+
+        svg {
+          fill: $dark;
+        }
+      }
     }
   }
 }

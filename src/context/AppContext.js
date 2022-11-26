@@ -1,15 +1,9 @@
 import React, { useReducer, createContext, useEffect } from 'react';
 import axios from '../fetch';
-import { URLS, GENRE_CODE } from '../constants';
+import { GENRE_CODE } from '../constants';
 import {
   GET_ACTION_MOVIES,
-  GET_MOVIE_DETAILS,
-  GET_MOVIE_DETAILS_SUCCESS,
-  GET_MOVIE_DETAILS_FAIL,
-  GET_NETFLIX_ORIGINALS,
-  GET_SEARCH_MOVIE,
   GET_SEARCH_MOVIE_FAIL,
-  GET_SEARCH_MOVIE_SUCCESS,
   GET_TOP_RATED,
   GET_TRENDING,
   GET_COMEDY_MOVIES,
@@ -25,11 +19,6 @@ export const AppContext = createContext();
 
 const apiKey = process.env.REACT_APP_API_KEY;
 
-const MEDIA_TYPE = {
-  tv: 'tv',
-  movie: 'movie',
-};
-
 const actionGenereByCode = {
   28: GET_ACTION_MOVIES,
   35: GET_COMEDY_MOVIES,
@@ -40,52 +29,36 @@ const actionGenereByCode = {
 
 export const AppContextProvider = props => {
   const [state, dispatch] = useReducer(reducer, initialState);
-
-  const fetchMovieDetails = async (mediaType, mediaId) => {
-    try {
-      dispatch({ type: GET_MOVIE_DETAILS });
-      let urlPath;
-      if (mediaType === MEDIA_TYPE.movie) {
-        urlPath = `/movie/${mediaId}?api_key=${apiKey}`;
-      }
-      if (mediaType === MEDIA_TYPE.tv) {
-        urlPath = `/tv/${mediaId}?api_key=${apiKey}`;
-      }
-
-      const request = await axios.get(urlPath);
-      dispatch({
-        type: GET_MOVIE_DETAILS_SUCCESS,
-        payload: request,
-      });
-    } catch (error) {
-      dispatch({ type: GET_MOVIE_DETAILS_FAIL });
-    }
-  };
-
-  const fetchSearchMovie = async searchTerm => {
-    try {
-      dispatch({ type: GET_SEARCH_MOVIE });
-      const request = await axios.get(URLS.urlSearch(apiKey, searchTerm));
-      dispatch({
-        type: GET_SEARCH_MOVIE_SUCCESS,
-        payload: request.data.results,
-      });
-    } catch (error) {
-      dispatch({ type: GET_SEARCH_MOVIE_FAIL });
-    }
-  };
-
-  const fetchNetflixOriginals = async () => {
-    try {
-      const request = await axios.get(URLS.urlDiscover(apiKey, '123'));
-      dispatch({
-        type: GET_NETFLIX_ORIGINALS,
-        payload: request.data.results,
-      });
-    } catch (error) {
-      dispatch({ type: GET_SEARCH_MOVIE_FAIL });
-    }
-  };
+  const sections = [
+    {
+      title: 'Trending',
+      movies: state.trending,
+    },
+    {
+      title: 'Top Rated',
+      movies: state.topRated,
+    },
+    {
+      title: 'Action Movies',
+      movies: state.action,
+    },
+    {
+      title: 'Comedy',
+      movies: state.comedy,
+    },
+    {
+      title: 'Horror Movies',
+      movies: state.horror,
+    },
+    {
+      title: 'Romance',
+      movies: state.romance,
+    },
+    {
+      title: 'Documentaries',
+      movies: state.documentary,
+    },
+  ];
 
   const fetchTrending = async () => {
     try {
@@ -128,8 +101,8 @@ export const AppContextProvider = props => {
       dispatch({ type: GET_SEARCH_MOVIE_FAIL });
     }
   };
+
   useEffect(() => {
-    fetchNetflixOriginals();
     fetchTrending();
     fetchTopRated();
     fetchByGenre(GENRE_CODE.Action);
@@ -140,7 +113,7 @@ export const AppContextProvider = props => {
   }, [dispatch]);
 
   return (
-    <AppContext.Provider value={[state, dispatch]}>
+    <AppContext.Provider value={[state, dispatch, sections]}>
       {props.children}
     </AppContext.Provider>
   );

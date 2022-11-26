@@ -8,8 +8,8 @@ function App() {
     <BrowserRouter>
       <Navbar />
       <Switch>
-        <Route path="/" exact render={() => <Redirect to="/browse" />} />
-        <Route path="/browse" component={Home} />
+        <Route path="/" exact render={() => <Redirect to="/movies" />} />
+        <Route path="/movies" component={Home} />
       </Switch>
     </BrowserRouter>
   );

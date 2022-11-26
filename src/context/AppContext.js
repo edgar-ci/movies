@@ -1,6 +1,6 @@
 import React, { useReducer, createContext, useEffect } from 'react';
 import axios from '../fetch';
-import { URLS } from '../constants';
+import { URLS, GENRE_CODE } from '../constants';
 import {
   GET_ACTION_MOVIES,
   GET_MOVIE_DETAILS,
@@ -40,7 +40,6 @@ const actionGenereByCode = {
 
 export const AppContextProvider = props => {
   const [state, dispatch] = useReducer(reducer, initialState);
-  useEffect(() => {}, [state]);
 
   const fetchMovieDetails = async (mediaType, mediaId) => {
     try {
@@ -129,20 +128,19 @@ export const AppContextProvider = props => {
       dispatch({ type: GET_SEARCH_MOVIE_FAIL });
     }
   };
+  useEffect(() => {
+    fetchNetflixOriginals();
+    fetchTrending();
+    fetchTopRated();
+    fetchByGenre(GENRE_CODE.Action);
+    fetchByGenre(GENRE_CODE.Comedy);
+    fetchByGenre(GENRE_CODE.Documentaries);
+    fetchByGenre(GENRE_CODE.Horror);
+    fetchByGenre(GENRE_CODE.Romance);
+  }, [dispatch]);
 
   return (
-    <AppContext.Provider
-      value={{
-        state,
-        dispatch,
-        fetchMovieDetails,
-        fetchSearchMovie,
-        fetchNetflixOriginals,
-        fetchTrending,
-        fetchTopRated,
-        fetchByGenre,
-      }}
-    >
+    <AppContext.Provider value={[state, dispatch]}>
       {props.children}
     </AppContext.Provider>
   );

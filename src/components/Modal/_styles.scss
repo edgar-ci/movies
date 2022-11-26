@@ -1,0 +1,147 @@
+.modal {
+  background-size: cover;
+  position: fixed;
+  z-index: 500;
+  width: 100%;
+  top: 0;
+  left: 0;
+  color: $white;
+  height: 52rem;
+  opacity: 0;
+  box-shadow: 0 1.5rem 4rem rgba($gray-100, 0.15);
+  transition: all 0.3s;
+
+  @include responsive(tab_port) {
+    height: 38rem;
+  }
+
+  @include responsive(phone) {
+    height: 50rem;
+  }
+
+  &__container {
+    background: linear-gradient(90deg, $dark 50%, transparent);
+    width: 70%;
+    padding-top: 3rem;
+    height: 100%;
+    padding-left: 5rem;
+
+    @include responsive(tab_port) {
+      background: linear-gradient(
+        90deg,
+        $dark 55%,
+        rgba($dark, 0.733),
+        transparent
+      );
+      width: 88%;
+    }
+
+    @include responsive(tab_medium) {
+      background: linear-gradient(90deg, rgba($dark, 0.966) 65%, transparent);
+      width: 100%;
+    }
+
+    @include responsive(phone) {
+      padding-top: 1rem;
+      padding-left: 1rem;
+    }
+  }
+
+  &__title {
+    font-size: 4rem;
+  }
+
+  &__rating {
+    font-size: 2rem;
+  }
+
+  &__info {
+    padding-top: 1.6rem;
+    font-size: 2rem;
+
+    @include responsive(phone) {
+      padding-top: 1.2rem;
+    }
+  }
+
+  &__episode {
+    padding-top: 0.5rem;
+    font-size: 2rem;
+  }
+
+  &__overview {
+    color: $gray;
+    padding-top: 2rem;
+    font-size: 2rem;
+    hyphens: auto;
+    width: 60%;
+    line-height: 1.2;
+
+    @include responsive(lg) {
+      width: 60%;
+      font-size: 1.8rem;
+    }
+
+    @include responsive(md) {
+      width: 80%;
+    }
+
+    @include responsive(sm) {
+      width: 95%;
+      color: rgba($white, 0.877);
+    }
+
+    @include responsive(xs) {
+      padding-top: 1rem;
+      font-size: 1.7rem;
+    }
+  }
+
+  &__btn {
+    text-transform: uppercase;
+    font-weight: 500;
+    cursor: pointer;
+    background-color: transparent;
+    color: $white;
+    border: 0.5px solid $gray;
+    border-radius: 2px;
+    font-size: 1.5rem;
+    margin-top: 2rem;
+    margin-right: 1rem;
+    padding: 1rem 2rem 1rem 2rem;
+    transition: all 0.2s;
+
+    @include responsive(phone) {
+      margin-top: 1rem;
+    }
+
+    &:hover {
+      transform: scale(1.09);
+    }
+
+    &--red {
+      background-color: $red;
+      border: none;
+    }
+
+    &--icon {
+      fill: $white;
+      padding-right: 1rem;
+      height: 1.4rem;
+      width: 1.4rem;
+    }
+  }
+}
+
+.show {
+  transition: 0.3s 0.3s ease-out;
+  top: 25%;
+  left: 0;
+  visibility: visible;
+  opacity: 1;
+}
+
+.hide {
+  visibility: hidden;
+  transition: 0.3s ease-out;
+}

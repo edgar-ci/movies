@@ -1,7 +1,10 @@
-import React, { useState } from 'react';
-import MainContent from '../components/MainContent';
+/* eslint-disable prettier/prettier */
+import React, { useState, useContext } from 'react';
 import Modal from '../components/Modal';
-import ModalMovieDetails from '../components/ModalMovieDetails';
+import Header from '../components/Header';
+import { AppContext } from '../context/AppContext';
+import { LANDING } from '../constants';
+import SliderMovies from '../components/SliderMovies';
 
 function Home() {
   const [toggleModal, setToggleModal] = useState(false);
@@ -15,20 +18,32 @@ function Home() {
   const closeModal = () => {
     setToggleModal(false);
   };
+  const [, , sections] = useContext(AppContext);
 
   return (
-    <>
-      <div className="main-content">
-        <MainContent selectMovieHandler={selectMovieHandler} />
+    <div className="main-content">
+      <div className="container">
+        <Header {...LANDING} />
+        <div className="slider__movies">
+          {sections.map(({ title, movies }) => (
+            <>
+              <h1 className="slider__movies--heading">{title}</h1>
+              <SliderMovies
+                key={title}
+                selectMovieHandler={selectMovieHandler}
+                movies={movies}
+              />
+            </>
+          ))}
+        </div>
       </div>
       <Modal
         show={toggleModal}
         modalClosed={closeModal}
         backgroundImage={movieDetails.backdrop_path || movieDetails.poster_path}
-      >
-        <ModalMovieDetails movie={movieDetails} />
-      </Modal>
-    </>
+        movie={movieDetails}
+      />
+    </div>
   );
 }
 

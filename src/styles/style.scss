@@ -1,0 +1,13 @@
+@import 'mixin';
+@import 'variables';
+
+@import 'reset';
+@import 'base';
+
+@import '../components/Backdrop/styles';
+@import '../components/Modal/styles';
+@import '../components/SliderMovies/styles';
+
+@import '../components/Header/styles';
+@import '../components/Navbar/styles';
+@import '../components/Submenu/styles';

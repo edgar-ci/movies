@@ -1,0 +1,148 @@
+.header {
+    position: relative;
+    padding-top: 56.25%;
+    background-color: rgba($dark, 0.5);
+    &::after {
+      content: ' ';
+      position: absolute;
+      bottom: 0;
+      height: 6rem;
+      width: 100%;
+      left: 0;
+      right: 0;
+
+      background-image: linear-gradient(
+        180deg,
+        transparent,
+        rgba($dark, 0.2),
+        rgba($dark, 0.6) 30%,
+        rgba($dark, 0.8) 60%,
+        rgba($dark, 1) 90%,
+      );
+
+      @include responsive(phone) {
+        height: 4rem;
+      }
+    }
+  
+    @include responsive(phone) {
+      padding-top: 0;
+      height: 30rem;
+    }
+  
+    &__video {
+      position: absolute;
+      top: 0;
+      left: 0;
+      z-index: -1;
+    }
+
+    &__main {
+      position: absolute;
+      top: 0;
+      left: 0;
+      right: 0;
+      width: 100%;
+      padding: 18rem 4% 0;
+    }
+    
+    &__title {
+      font-size: 4rem;
+      color: $white;
+      font-weight: 600;
+      margin-top: 5rem;
+    }
+
+    &__description {
+      color: $white;
+      width: 50rem;
+      line-height: 1.4;
+      padding-top: 2rem;
+      font-size: 1.5rem;
+
+      @include responsive(phone) {
+        top: 10rem;
+        width: 20rem;
+      }
+    }
+
+    &__btns {
+      width: 100%;
+      display: flex;
+      margin-top: 4.5rem;
+      justify-content: space-between;
+      align-items: center;
+      &--first{
+        display: flex;
+        column-gap: 1.2rem;
+      }
+    }
+
+    &__btn {
+      &--play,
+      &--info {
+        height: auto;
+        cursor: pointer;
+        font-size: 1.4rem;
+        line-height: 1;
+        color: $white;
+        outline: none;
+        border: none;
+        font-weight: 700;
+        border-radius: 4px;
+        padding: 0.725rem 1rem;
+        display: flex;
+        align-items: center;
+        justify-content: space-evenly;
+      }
+
+      &--volume {
+        height: 3rem;
+        width: 3rem;
+        cursor: pointer;
+        border-radius: 50%;
+        padding: 1rem;
+        border: rgba($white, 0.8) solid 1px;
+        transition: all 0.3s;
+        background-color: rgba($dark, 0.2);
+        display: flex;
+        justify-content: center;
+        align-content: center;
+
+        svg {
+          fill: $white;
+          transform: scale(2);
+          margin-top: 2px;
+        }
+
+        &:hover {
+          background-color: rgba(211, 211, 211, 0.178);
+          transition: all 0.3s;
+        }
+      }
+
+      &--play {
+        color: #000;
+        background-color: $white;
+        transition: all 0.2s;
+        box-shadow: 0 1px 2px rgba(0, 0, 0, 0.3);
+      }
+
+      &--info {
+        background-color: rgba($gray, 0.5);
+        span {
+          margin-left: 0.5rem;
+        }
+
+        &:hover {
+          background-color: rgb(37, 37, 37);
+        }
+      }
+      
+      &--icon {
+        font-size: 2rem;
+        line-height: 1;
+      }
+    }
+  }
+  

@@ -1,6 +1,6 @@
 import React, { useState } from 'react';
 import MainContent from '../components/MainContent';
-import Modal from '../components/UI/Modal';
+import Modal from '../components/Modal';
 import ModalMovieDetails from '../components/ModalMovieDetails';
 
 function Home() {

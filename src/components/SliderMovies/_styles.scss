@@ -21,13 +21,14 @@
 .slider__movies--container {
   overflow: visible;
   overflow-y: hidden;
-  padding: 1.5rem 0;
+  padding: .875rem 0 3rem;
 
   div.swiper-button-prev,
   div.swiper-button-next {
     transition: all 200ms !important;
     color: $white;
     opacity: 0;
+    top: 4.5rem;
     &:hover {
       transform: scale(1.2) !important;
       transition: all 200ms !important;
@@ -49,7 +50,7 @@
 
 .swiper-wrapper:hover {
   .swiper-slide {
-    z-index: 10000;
+    z-index: 100;
     &:hover {
       transform: scale(1.125) !important;
       box-shadow: rgb(0 0 0 / 75%) 0px 3px 10px;
@@ -63,25 +64,32 @@
   .slider__footer {
     display: block;
     z-index: 102;
+    opacity: 1;
   }
 }
 
 .slider__movies {
   background-color: transparent;
-  grid-column: 2 / 13;
   color: $white;
   margin-top: -80px;
 
   &--heading {
     position: relative;
     padding-left: 4rem;
-    font-weight: 500;
-    font-size: 1rem;
+    font-weight: 600;
+    font-size: 1.5rem;
   }
 
-  &--container::-webkit-scrollbar {
+  &--container{
+    padding-bottom: 140px;
+    margin-bottom: -100px;
+    &:hover{
+      z-index: 100;
+    }
+
+    &::-webkit-scrollbar {
     display: none;
-  }
+  }}
 
   &--movie:hover ~ &--movie {
     transform: translate3d(2rem, 0, 0);
@@ -115,7 +123,10 @@
     z-index: 101;
     left: 0;
     right: 0;
-    top: 160px;
+    top: 120px;
+    opacity: 0;
+    transition: all 0.4s ease-in-out;
+    border-radius: 0 0 5px 5px;
     &--btns {
       display: flex;
       justify-content: space-between;
@@ -124,6 +135,56 @@
         column-gap: 0.5rem;
         display: flex;
         justify-content: space-between;
+      }
+    }
+
+    &--wrapper {
+      display: flex;
+      justify-content: space-between;
+    }
+
+    &--percent {
+      
+      font-weight: bold;
+      font-size: 0.875rem;
+      &.active {
+        color: #46d369;
+      }
+    }
+
+    &--timer {
+      font-weight: bold;
+      font-size: 0.875rem;
+    }
+
+    &--labels {
+      display: flex;
+      margin-top: 1rem;
+      justify-content: start;
+      width: 100%;
+      column-gap: .5rem;
+      li {
+        position: relative;
+        font-size: .875rem;
+        padding-left: 0.875rem;
+        text-transform: capitalize;
+
+        &::after {
+          content: ' ';
+          width: 4px;
+          height: 4px;
+          background-color: #aaa;
+          top: 6px;
+          position: absolute;
+          left: 0;
+          border-radius: 50%;
+        }
+        &:first-child{
+          padding-left: 0;
+          &::after {
+            display: none;
+          }
+        }
       }
     }
 
@@ -137,6 +198,7 @@
       align-items: center;
       font-size: 1.25rem;
       transition: all 200ms ease-in-out;
+      background-color: rgba($white, 0.05);
       &:hover {
         border: 2px solid #fff;
       }

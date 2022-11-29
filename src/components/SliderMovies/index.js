@@ -13,16 +13,16 @@ SwiperCore.use([Navigation, Pagination, Scrollbar, A11y]);
 
 const breakpontis = {
   1378: {
+    slidesPerView: 7,
+    slidesPerGroup: 7,
+  },
+  998: {
     slidesPerView: 5,
     slidesPerGroup: 5,
   },
-  998: {
+  625: {
     slidesPerView: 4,
     slidesPerGroup: 4,
-  },
-  625: {
-    slidesPerView: 3,
-    slidesPerGroup: 3,
   },
   0: {
     slidesPerView: 2,
@@ -42,12 +42,18 @@ const loopAdditionalSlides = width => {
   }
   return 2;
 };
-
 const scrollbar = { draggable: false, hide: true };
 
 const SliderMovies = ({ movies, selectMovieHandler }) => {
   const [windowDimensions] = useViewport();
   const { width } = windowDimensions;
+  const bgImage = ({ backdrop_path, ...mv }) => {
+    console.log(mv);
+    const pathBgMovie = `${URLS.urlImages}/w500/`;
+    return backdrop_path
+      ? `${pathBgMovie}${backdrop_path}`
+      : 'https://picsum.photos/500/281/';
+  };
 
   return (
     <Swiper
@@ -64,41 +70,54 @@ const SliderMovies = ({ movies, selectMovieHandler }) => {
       slideToClickedSlide={false}
       pagination={{ clickable: true }}
     >
-      {movies?.map((movie, idx) => (
-        <SwiperSlide key={idx} className={'slider__movies--movie'}>
-          <img
-            src={`${URLS.urlImages}/w500/${movie.backdrop_path}`}
-            className="slider__movies--movie-image"
-          />
-          <footer className="slider__footer">
-            <div className="slider__footer--btns">
-              <div>
-                <i className="slider__footer--icon bg-white">
-                  <HiPlay />
-                </i>
+      {movies?.map((movie, idx) => {
+        const percent = Math.floor(Math.random() * 99);
+
+        return (
+          <SwiperSlide key={idx} className={'slider__movies--movie'}>
+            <img src={bgImage(movie)} className="slider__movies--movie-image" />
+            <footer
+              className="slider__footer"
+              onClick={() => selectMovieHandler(movie)}
+            >
+              <div className="slider__footer--btns">
+                <div>
+                  <i className="slider__footer--icon bg-white">
+                    <HiPlay />
+                  </i>
+                  <i className="slider__footer--icon">
+                    <HiPlus />
+                  </i>
+                  <i className="slider__footer--icon">
+                    <BiLike />
+                  </i>
+                </div>
                 <i className="slider__footer--icon">
-                  <HiPlus />
-                </i>
-                <i className="slider__footer--icon">
-                  <BiLike />
+                  <SlArrowDown />
                 </i>
               </div>
-              <i className="slider__footer--icon">
-                <SlArrowDown onClick={() => selectMovieHandler(movie)} />
-              </i>
-            </div>
-            <div className="slider__footer--wrapper">
-              <span>95 % para ti </span>
-              <span>1 h 30 min</span>
-            </div>
-            <ul className="slider__footer--labels">
-              <li>label</li>
-              <li>label</li>
-              <li>label</li>
-            </ul>
-          </footer>
-        </SwiperSlide>
-      ))}
+              <div className="slider__footer--wrapper">
+                <span
+                  className={`slider__footer--percent ${
+                    percent > 60 ? 'active' : ''
+                  }`}
+                >
+                  {percent < 50 ? 50 : percent} % para ti{' '}
+                </span>
+                <span className="slider__footer--timer">
+                  {Math.floor(Math.random() * 3)} h{' '}
+                  {Math.floor(Math.random() * 59)} min
+                </span>
+              </div>
+              <ul className="slider__footer--labels">
+                <li>label</li>
+                <li>label</li>
+                <li>label</li>
+              </ul>
+            </footer>
+          </SwiperSlide>
+        );
+      })}
     </Swiper>
   );
 };

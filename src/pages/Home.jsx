@@ -26,14 +26,13 @@ function Home() {
         <Header {...LANDING} />
         <div className="slider__movies">
           {sections.map(({ title, movies }) => (
-            <>
-              <h1 className="slider__movies--heading">{title}</h1>
               <SliderMovies
                 key={title}
+                title={title}
                 selectMovieHandler={selectMovieHandler}
                 movies={movies}
               />
-            </>
+
           ))}
         </div>
       </div>

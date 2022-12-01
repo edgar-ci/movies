@@ -58,6 +58,10 @@
   }
 }
 
+.swiper-pagination-bullets {
+  display: none !important;
+}
+
 .slider__movies--movie:hover {
   padding-right: 0 !important;
   transform: translateY(0.5rem);

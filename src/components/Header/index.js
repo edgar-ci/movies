@@ -13,7 +13,7 @@ const Header = ({ title, description }) => {
     <header className="header">
       <ReactPlayer
         loop={true}
-        playing={false}
+        playing={true}
         volume={1}
         muted={isMuted}
         width="100%"
